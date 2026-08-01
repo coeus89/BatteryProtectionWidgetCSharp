@@ -1,1 +1,1 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.example.batteryprotectionwidget"><application android:label="Battery Protection Widget"/></manifest>
+﻿<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.example.batteryprotectionwidget"><application android:label="Battery Protection Widget" android:icon="@mipmap/ic_launcher"/></manifest>

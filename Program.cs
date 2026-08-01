@@ -30,10 +30,16 @@ public class BatteryProtectionWidgetProvider : AppWidgetProvider
             {
                 intent = new Intent(Intent.ActionPowerUsageSummary);
             }
-            var pending = PendingIntent.GetActivity(context,id,intent,PendingIntentFlags.Immutable|PendingIntentFlags.UpdateCurrent);
+
+            // Use runtime check so Immutable is only used on API 23+ (avoids CA1416)
+            var flags = PendingIntentFlags.UpdateCurrent;
+            if (Android.OS.Build.VERSION.SdkInt >= Android.OS.BuildVersionCodes.M)
+                flags |= PendingIntentFlags.Immutable;
+
+            var pending = PendingIntent.GetActivity(context, id, intent, flags);
             var views = new RemoteViews(context.PackageName, Resource.Layout.widget_battery);
-            views.SetOnClickPendingIntent(Resource.Id.widgetRoot,pending);
-            appWidgetManager.UpdateAppWidget(id,views);
+            views.SetOnClickPendingIntent(Resource.Id.widgetRoot, pending);
+            appWidgetManager.UpdateAppWidget(id, views);
         }
     }
 }
